@@ -1,0 +1,45 @@
+import requests
+
+def buscar_pokemon(pokemon: str):
+    url = f"https://pokeapi.co/api/v2/pokemon/{pokemon}"
+    try:
+        response = requests.get(url, timeout = 10)
+        
+        if response.status_code != 200:
+            return None
+    
+        dados = response.json()
+
+        pokemon_dados = {
+            "name": dados.get("name","").capitalize(),
+            "height": dados.get("height"),
+            "weight": dados.get("weight"),
+            "types": [t["type"]["name"]for t in dados.get("types", [])],
+            "abilities": [
+            h['ability']['name']for h in dados.get("abilities", [])
+        ]
+    }
+
+        return pokemon_dados
+    except requests.exceptions.RequestException:
+        return None
+
+
+def exibir_pokemon(pokemon: str) -> None:
+    print(f"nome: {pokemon['name']}")
+    print(f"Altura: {pokemon['height']}")
+    print(f"Peso: {pokemon['weight']}")
+    print(f"Tipos: {', '.join(pokemon['types'])}")
+    print(f"Habilidades: {', '.join(pokemon['abilities'])}")
+
+def main() -> None:
+    nome = input("Digite o nome do pokémon: ").strip().lower()
+    resultado = buscar_pokemon(nome)
+
+    if resultado:
+        exibir_pokemon(resultado)
+    else:
+        print("Não foi possivel obter os dados do pokemon")
+
+if __name__ == "__main__":
+    main()
