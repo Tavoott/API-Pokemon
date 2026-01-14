@@ -10,7 +10,7 @@ Projeto em Python que consome a **PokéAPI** para buscar e exibir informações 
 - Consome uma API REST pública (PokéAPI)
 - Trata erros de conexão e Pokémon inexistente
 - Organiza o código usando funções
-- Separa lógica de negócio da exibição dos dados
+- Separa lógica de busca da exibição dos dados
 
 ---
 
@@ -18,7 +18,6 @@ Projeto em Python que consome a **PokéAPI** para buscar e exibir informações 
 
 - **Python 3.10+**
 - **Requests**
-- **Typing (Optional, Dict)**
 
 ---
 
